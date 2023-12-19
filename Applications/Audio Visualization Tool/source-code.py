@@ -13,6 +13,7 @@ if you don't have pyaudio, then run
 note: with 2048 samples per chunk, I'm getting 20FPS
 """
 
+
 import pyaudio
 import os
 import struct
@@ -82,28 +83,28 @@ start_time = time.time()
 
 while True:
 
-    # binary data
-    data = stream.read(CHUNK)
+        # binary data
+        data = stream.read(CHUNK)
 
-    # convert data to integers, make np array, then offset it by 127
-    data_int = struct.unpack(str(2 * CHUNK) + 'B', data)
+            # convert data to integers, make np array, then offset it by 127
+        data_int = struct.unpack(f'{str(2 * CHUNK)}B', data)
 
-    # create np array and offset by 128
-    data_np = np.array(data_int, dtype='b')[::2] + 128
+        # create np array and offset by 128
+        data_np = np.array(data_int, dtype='b')[::2] + 128
 
-    line.set_ydata(data_np)
+        line.set_ydata(data_np)
 
-    # update figure canvas
-    try:
-        fig.canvas.draw()
-        fig.canvas.flush_events()
-        frame_count += 1
+        # update figure canvas
+        try:
+            fig.canvas.draw()
+            fig.canvas.flush_events()
+            frame_count += 1
 
-    except TclError:
+        except TclError:
 
-        # calculate average frame rate
-        frame_rate = frame_count / (time.time() - start_time)
+            # calculate average frame rate
+            frame_rate = frame_count / (time.time() - start_time)
 
-        print('stream stopped')
-        print('average frame rate = {:.0f} FPS'.format(frame_rate))
-        break
+            print('stream stopped')
+            print('average frame rate = {:.0f} FPS'.format(frame_rate))
+            break
