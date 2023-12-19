@@ -33,10 +33,10 @@ def measure_noise():
 def generate_numbers():
     noise = measure_noise()
     random.seed(sum(noise))
-    random_numbers = []
-    for i in range(10):  # generate 10 random numbers
-        random_numbers.append(random.random() * data["main"]["temp"] * data["wind"]["speed"])
-    return random_numbers
+    return [
+        random.random() * data["main"]["temp"] * data["wind"]["speed"]
+        for _ in range(10)
+    ]
 
 # # Test the program
 print(generate_numbers())

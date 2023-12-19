@@ -10,8 +10,13 @@ random_bytes = os.urandom(length)
 
 # Convert the random bytes to a string
 string_list = []
-for i in range(10):
-    random_string = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(length)])
+for _ in range(10):
+    random_string = ''.join(
+        [
+            random.choice(string.ascii_letters + string.digits)
+            for _ in range(length)
+        ]
+    )
     string_list.append(random_string)
 
 print(string_list)

@@ -5,13 +5,11 @@ from tkinter.font import Font
 
 def generate_password():
   password=[]
-  for i in range(2):
+  for _ in range(2):
     alpha=random.choice(string.ascii_letters)
     symbol=random.choice(string.punctuation)
     numbers=random.choice(string.digits)
-    password.append(alpha)
-    password.append(symbol)
-    password.append(numbers)
+    password.extend((alpha, symbol, numbers))
   y="".join(str(x)for x in password)
   lbl.config(text=y)
 

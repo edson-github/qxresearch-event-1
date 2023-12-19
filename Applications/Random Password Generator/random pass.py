@@ -13,7 +13,7 @@ def get_pass():
     pass1 = string.ascii_letters + string.digits + string.punctuation
     password = ""
 
-    for x in range(pwd_len.get()): #loop to generate the user given length for password
+    for _ in range(pwd_len.get()):
         password = password + random.choice(pass1)
     passstr.set(password)
 

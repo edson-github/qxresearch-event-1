@@ -15,7 +15,7 @@ p = pyaudio.PyAudio()
 # open the microphone and start recording
 stream = p.open(format=format, channels=channels, rate=rate, input=True, frames_per_buffer=chunk)
 frames = []
-for i in range(0, int(rate / chunk * record_seconds)):
+for _ in range(0, int(rate / chunk * record_seconds)):
     data = stream.read(chunk)
     frames.append(data)
 

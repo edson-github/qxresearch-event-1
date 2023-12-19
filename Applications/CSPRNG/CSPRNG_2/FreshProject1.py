@@ -33,7 +33,7 @@ p = pyaudio.PyAudio()
 # open the microphone and start recording
 stream = p.open(format=format, channels=channels, rate=rate, input=True, frames_per_buffer=chunk)
 frames = []
-for i in range(0, int(rate / chunk * record_seconds)):
+for _ in range(0, int(rate / chunk * record_seconds)):
     data = stream.read(chunk)
     frames.append(data)
 
@@ -48,10 +48,10 @@ p.terminate()
 random_numbers = []
 for frame in frames:
     # unpack the audio data to get the amplitude values
-    amplitude_values = struct.unpack(str(2 * chunk) + 'B', frame)
+    amplitude_values = struct.unpack(f'{str(2 * chunk)}B', frame)
     # print(amplitude_values)
     # generate a random number based on the amplitude values
-    random_number = sum(amplitude_values) % 100 
+    random_number = sum(amplitude_values) % 100
     temp = int(info["main"]["temp"])
     random_numbers.append(random_number * temp)
 
